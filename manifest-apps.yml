@@ -1,0 +1,20 @@
+---
+memory: 1024M
+instances: 1
+buildpack: java_buildpack_offline
+env:
+  CF_TARGET: https://api.run.haas-76.pez.pivotal.io
+applications:
+- name: fortune-service
+  host: backends-sg
+  path: fortune-teller-fortune-service/target/fortune-teller-fortune-service-0.0.1-SNAPSHOT.jar
+  services:
+  - config-server
+  - service-registry
+- name: fortune-ui
+  host: backends-ui-sg
+  path: fortune-teller-ui/target/fortune-teller-ui-0.0.1-SNAPSHOT.jar
+  services:
+  - config-server
+  - service-registry
+  - circuit-breaker-dashboard
